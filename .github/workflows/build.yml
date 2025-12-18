@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v2
 
     - name: Build VST3
       # Projucer가 만든 윈도우용 솔루션 파일을 찾아 빌드합니다.
@@ -21,7 +21,7 @@ jobs:
       run: msbuild Builds/VisualStudio2022/Prism.sln /p:Configuration=Release /p:Platform=x64
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Prism-Windows-VST3
         # 빌드된 VST3 파일이 생성되는 경로 (보통 이 경로에 생깁니다)
