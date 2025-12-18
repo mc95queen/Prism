@@ -1,1 +1,18 @@
-Builds/
+# --- JUCE Smart Ignore Rules ---
+
+# 무거운 빌드 결과물은 무시하기
+**/build/
+**/Builds/*/Debug/
+**/Builds/*/Release/
+**/Builds/*/x64/
+**/Builds/*/Shared Code/
+
+# 용량 큰 바이너리 파일 막기
+*.a
+*.o
+*.obj
+*.lib
+*.dll
+*.exe
+*.res
+*.pch
