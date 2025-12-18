@@ -1,0 +1,28 @@
+name: Build VST3 for Windows
+
+on:
+  push:
+    branches: [ main, master ] # main 또는 master 브랜치에 푸시하면 작동
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build VST3
+      # Projucer가 만든 윈도우용 솔루션 파일을 찾아 빌드합니다.
+      # Configuration=Release로 설정하여 최적화된 버전을 만듭니다.
+      run: msbuild Builds/VisualStudio2022/Prism.sln /p:Configuration=Release /p:Platform=x64
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Prism-Windows-VST3
+        # 빌드된 VST3 파일이 생성되는 경로 (보통 이 경로에 생깁니다)
+        path: Builds/VisualStudio2022/x64/Release/VST3/**
